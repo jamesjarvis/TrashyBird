@@ -13,7 +13,7 @@ public class Background {
     private Rectangle floorTopper;
     private Color floorTopperColor;
 
-    private int floorHeight = 120;
+    private int floorHeight = 100;
 
     public Background(int WIDTH, int HEIGHT) {
         this.sky = new Rectangle(0,0,WIDTH, HEIGHT);
@@ -26,7 +26,7 @@ public class Background {
         this.floorTopperColor = Color.GREEN;
     }
 
-    public Graphics paintBackground(Graphics g){
+    public void paintBackground(Graphics g){
         g.setColor(skyColor);
         g.fillRect(sky.x, sky.y, sky.width, sky.height);
 
@@ -35,7 +35,5 @@ public class Background {
 
         g.setColor(floorTopperColor);
         g.fillRect(floorTopper.x, floorTopper.y, floorTopper.width, floorTopper.height);
-
-        return g;
     }
 }

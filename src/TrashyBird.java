@@ -40,9 +40,11 @@ public class TrashyBird implements ActionListener{
 
         renderer = new Renderer();
         background = new Background(WIDTH, HEIGHT);
+        bird = new Bird(WIDTH, HEIGHT);
         rand = new Random();
 
         jframe.add(renderer);
+        jframe.setTitle("TrashyBird");
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jframe.setResizable(false);
         jframe.setSize(WIDTH, HEIGHT);
@@ -53,7 +55,8 @@ public class TrashyBird implements ActionListener{
     //Used to repaint the whole scene
     public void repaint(Graphics g){
         System.out.println("hello");
-        g = background.paintBackground(g);
+        background.paintBackground(g);
+        bird.paintBird(g);
     }
 
     @Override
