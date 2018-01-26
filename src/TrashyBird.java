@@ -32,7 +32,7 @@ public class TrashyBird implements ActionListener{
 
     private ArrayList<Column> columns;
 
-    
+
     public TrashyBird() {
         JFrame jframe = new JFrame();
         Timer timer = new Timer(20, this);
@@ -77,9 +77,7 @@ public class TrashyBird implements ActionListener{
         for(Column column: columns){
             column.paintColumn(g);
         }
-
-        g.setColor(Color.BLACK);
-        g.fillRect(0,0,50,50);
+        
     }
 
     @Override
