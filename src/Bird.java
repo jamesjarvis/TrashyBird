@@ -20,7 +20,6 @@ public class Bird{
 
     public int getSIZE() {
         return SIZE;
-
     }
 
     public void paintBird(Graphics g){

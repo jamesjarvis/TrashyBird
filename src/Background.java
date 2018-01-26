@@ -13,16 +13,16 @@ public class Background {
     private Rectangle floorTopper;
     private Color floorTopperColor;
 
-    private int floorHeight = 100;
+    private int FLOOR_HEIGHT = 100;
 
     public Background(int WIDTH, int HEIGHT) {
         this.sky = new Rectangle(0,0,WIDTH, HEIGHT);
         this.skyColor = Color.CYAN;
 
-        this.floor = new Rectangle(0,HEIGHT-floorHeight,WIDTH, floorHeight);
+        this.floor = new Rectangle(0,HEIGHT-FLOOR_HEIGHT,WIDTH, FLOOR_HEIGHT);
         this.floorColor = Color.ORANGE;
 
-        this.floorTopper = new Rectangle(0,HEIGHT-floorHeight, WIDTH, 20);
+        this.floorTopper = new Rectangle(0,HEIGHT-FLOOR_HEIGHT, WIDTH, 20);
         this.floorTopperColor = Color.GREEN;
     }
 

@@ -16,24 +16,23 @@ import javax.swing.Timer;
 
 public class TrashyBird implements ActionListener{
 
-    static TrashyBird trashyBird;
+    public static TrashyBird trashyBird;
 
     private final int WIDTH = 400, HEIGHT = 400;
 
     public boolean gameOver, started;
 
-    Renderer renderer;
+    private Renderer renderer;
 
-    Background background;
+    private Background background;
 
-    Bird bird;
+    private Bird bird;
 
-    Random rand;
+    private Random rand;
 
+    private ArrayList<Column> columns;
 
-
-
-
+    
     public TrashyBird() {
         JFrame jframe = new JFrame();
         Timer timer = new Timer(20, this);
@@ -42,21 +41,45 @@ public class TrashyBird implements ActionListener{
         background = new Background(WIDTH, HEIGHT);
         bird = new Bird(WIDTH, HEIGHT);
         rand = new Random();
+        columns = new ArrayList<Column>();
 
         jframe.add(renderer);
         jframe.setTitle("TrashyBird");
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jframe.setResizable(false);
+        jframe.setResizable(true);
         jframe.setSize(WIDTH, HEIGHT);
         jframe.setVisible(true);
 
+        addColumn(true);
+        addColumn(true);
+
+        timer.start();
     }
+
+    public void addColumn(boolean start){
+        int SPACE = 300;
+        int columnWidth = Column.getWidth();
+
+        if(start){
+            columns.add(new Column(WIDTH+columnWidth+(columns.size()*SPACE), HEIGHT));
+        }else{
+            columns.add(new Column(WIDTH+columnWidth+(columns.get(columns.size()-1).getX()+(SPACE*2)), HEIGHT));
+        }
+    }
+
 
     //Used to repaint the whole scene
     public void repaint(Graphics g){
         System.out.println("hello");
         background.paintBackground(g);
         bird.paintBird(g);
+
+        for(Column column: columns){
+            column.paintColumn(g);
+        }
+
+        g.setColor(Color.BLACK);
+        g.fillRect(0,0,50,50);
     }
 
     @Override
