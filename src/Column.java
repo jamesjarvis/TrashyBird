@@ -8,7 +8,6 @@ public class Column {
     private static int WIDTH = 60;
     private int GAP = 50;
     private int MIN_FROM_EDGE = 50;
-    private int FLOOR_HEIGHT = 100;
     private int X;
 
     private Color color;
@@ -26,7 +25,7 @@ public class Column {
         this.color = Color.GREEN.darker();
 
         Random rand = new Random();
-        int randomHeight = rand.nextInt((HEIGHT-FLOOR_HEIGHT)-(2*MIN_FROM_EDGE));
+        int randomHeight = rand.nextInt((HEIGHT-Background.getFLOOR_HEIGHT())-(2*MIN_FROM_EDGE));
 
         this.top = new Rectangle(X, 0, this.WIDTH, MIN_FROM_EDGE+randomHeight-GAP);
         this.bottom = new Rectangle(X, MIN_FROM_EDGE+randomHeight, this.WIDTH, (HEIGHT-randomHeight)-MIN_FROM_EDGE);

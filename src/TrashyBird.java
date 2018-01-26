@@ -1,7 +1,4 @@
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -14,11 +11,13 @@ import javax.swing.JFrame;
 import javax.swing.Timer;
 
 
-public class TrashyBird implements ActionListener{
+public class TrashyBird implements ActionListener, KeyListener, MouseListener{
 
     public static TrashyBird trashyBird;
 
-    private final int WIDTH = 400, HEIGHT = 400;
+    private static final int WIDTH = 400, HEIGHT = 400;
+
+    private int ticks, speed;
 
     public boolean gameOver, started;
 
@@ -37,6 +36,8 @@ public class TrashyBird implements ActionListener{
         JFrame jframe = new JFrame();
         Timer timer = new Timer(20, this);
 
+        ticks = 0;
+        speed = 10;
         renderer = new Renderer();
         background = new Background(WIDTH, HEIGHT);
         bird = new Bird(WIDTH, HEIGHT);
@@ -48,6 +49,8 @@ public class TrashyBird implements ActionListener{
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jframe.setResizable(true);
         jframe.setSize(WIDTH, HEIGHT);
+        jframe.addMouseListener(this);
+        jframe.addKeyListener(this);
         jframe.setVisible(true);
 
         addColumn(true);
@@ -67,26 +70,77 @@ public class TrashyBird implements ActionListener{
         }
     }
 
+    public static int getHEIGHT() {
+        return HEIGHT;
+    }
 
     //Used to repaint the whole scene
     public void repaint(Graphics g){
-        System.out.println("hello");
         background.paintBackground(g);
         bird.paintBird(g);
 
         for(Column column: columns){
             column.paintColumn(g);
         }
-        
+
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        ticks++;
+
+
+        if(ticks%2==0){
+            bird.incrementPosition();
+        }
+        renderer.repaint();
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_SPACE)
+        {
+            bird.jump();
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e)
+    {
+
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        bird.jump();
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
 
     }
 
     public static void main(String[] args){
         trashyBird = new TrashyBird();
     }
-
 }
