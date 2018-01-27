@@ -14,7 +14,7 @@ public class Bird{
     private double velocity;
     private double MAX_velocity = 10;
     private double acceleration;
-    private double MAX_acceleration = 1;
+    private double MAX_acceleration = 0.9;
 
     public Bird(int WIDTH, int HEIGHT){
         this.y_location = HEIGHT/2 - SIZE;
@@ -44,9 +44,13 @@ public class Bird{
             y_location+=velocity;
             if(velocity<MAX_velocity&&velocity>-MAX_velocity){
                 velocity+=acceleration;
+            }else if(velocity<-MAX_velocity+5){
+                velocity = -MAX_velocity+4;
+            }else if(velocity>MAX_velocity){
+                velocity = MAX_velocity-1;
             }
             if(acceleration<MAX_acceleration){
-                acceleration+=0.05; //This is where the JUMP magic happens
+                acceleration+=0.5; //This is where the JUMP magic happens
             }
         }else if(y_location+SIZE>=(TrashyBird.getHEIGHT()-Background.getFLOOR_HEIGHT())){
             y_location = TrashyBird.getHEIGHT()-Background.getFLOOR_HEIGHT()-SIZE;
@@ -58,13 +62,14 @@ public class Bird{
             acceleration = 0;
         }
 
-        System.out.println("V: "+velocity+", A:"+acceleration);
+        //System.out.println("V: "+velocity+", A:"+acceleration);
         birdRect.setLocation(x_location, y_location);
     }
 
     public void jump(){
-        if(acceleration>=-MAX_acceleration){
-            acceleration = acceleration - 3;
+        if(acceleration>-3*MAX_acceleration){
+            acceleration = -3*MAX_acceleration;
+            velocity-=1;
         }else{
 
         }
