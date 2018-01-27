@@ -17,7 +17,8 @@ public class TrashyBird implements ActionListener, KeyListener, MouseListener{
 
     private static final int WIDTH = 400, HEIGHT = 400;
 
-    private int ticks, speed;
+    private int ticks;
+    private static int speed;
 
     public boolean gameOver, started;
 
@@ -37,7 +38,7 @@ public class TrashyBird implements ActionListener, KeyListener, MouseListener{
         Timer timer = new Timer(20, this);
 
         ticks = 0;
-        speed = 10;
+        speed = 4;
         renderer = new Renderer();
         background = new Background(WIDTH, HEIGHT);
         bird = new Bird(WIDTH, HEIGHT);
@@ -51,27 +52,34 @@ public class TrashyBird implements ActionListener, KeyListener, MouseListener{
         jframe.setSize(WIDTH, HEIGHT);
         jframe.addMouseListener(this);
         jframe.addKeyListener(this);
+
         jframe.setVisible(true);
 
         addColumn(true);
-        addColumn(true);
+        addColumn(false);
+        addColumn(false);
+        addColumn(false);
 
         timer.start();
     }
 
     public void addColumn(boolean start){
-        int SPACE = 300;
+        int SPACE = 200;
         int columnWidth = Column.getWidth();
 
         if(start){
             columns.add(new Column(WIDTH+columnWidth+(columns.size()*SPACE), HEIGHT));
         }else{
-            columns.add(new Column(WIDTH+columnWidth+(columns.get(columns.size()-1).getX()+(SPACE*2)), HEIGHT));
+            columns.add(new Column(columnWidth+(columns.get(columns.size()-1).getX()+SPACE), HEIGHT));
         }
     }
 
     public static int getHEIGHT() {
         return HEIGHT;
+    }
+
+    public static int getSpeed() {
+        return speed;
     }
 
     //Used to repaint the whole scene
@@ -92,6 +100,12 @@ public class TrashyBird implements ActionListener, KeyListener, MouseListener{
 
         if(ticks%2==0){
             bird.incrementPosition();
+            for(Column column: columns){
+                column.incrementPosition();
+            }
+            if(columns.get(0).getX()<=0){
+                addColumn(false);
+            }
         }
         renderer.repaint();
     }

@@ -6,7 +6,7 @@ import java.util.Random;
 public class Column {
 
     private static int WIDTH = 60;
-    private int GAP = 50;
+    private int GAP = 100;
     private int MIN_FROM_EDGE = 50;
     private int X;
 
@@ -27,8 +27,8 @@ public class Column {
         Random rand = new Random();
         int randomHeight = rand.nextInt((HEIGHT-Background.getFLOOR_HEIGHT())-(2*MIN_FROM_EDGE));
 
-        this.top = new Rectangle(X, 0, this.WIDTH, MIN_FROM_EDGE+randomHeight-GAP);
-        this.bottom = new Rectangle(X, MIN_FROM_EDGE+randomHeight, this.WIDTH, (HEIGHT-randomHeight)-MIN_FROM_EDGE);
+        this.top = new Rectangle(X, 0, this.WIDTH, MIN_FROM_EDGE+randomHeight);
+        this.bottom = new Rectangle(X, MIN_FROM_EDGE+randomHeight+GAP, this.WIDTH, (HEIGHT-randomHeight)-MIN_FROM_EDGE-GAP);
     }
 
     public static int getWidth() {
@@ -36,6 +36,12 @@ public class Column {
     }
     public int getX() {
         return X;
+    }
+
+    public void incrementPosition(){
+        X -= TrashyBird.getSpeed();
+        top.setLocation(X, top.y);
+        bottom.setLocation(X, bottom.y);
     }
 
     public void paintColumn(Graphics g){
