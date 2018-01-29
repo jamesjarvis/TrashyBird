@@ -67,33 +67,33 @@ public class TrashyBird implements ActionListener, KeyListener, MouseListener{
         int columnWidth = Column.getWidth();
 
         if(start){
-            columns.add(new Column(WIDTH+columnWidth+(columns.size()*SPACE), HEIGHT));
+            columns.add(new Column(WIDTH+columnWidth+(columns.size()*SPACE)));
         }else{
-            columns.add(new Column(columnWidth+(columns.get(columns.size()-1).getX()+SPACE), HEIGHT));
+            columns.add(new Column(columnWidth+(columns.get(columns.size()-1).getX()+SPACE)));
         }
     }
 
-    public static int getHEIGHT() {
+    static int getHEIGHT() {
         return HEIGHT;
     }
 
-    public static int getSpeed() {
+    static int getSpeed() {
         return speed;
     }
 
-    public static int getWIDTH() {
+    static int getWIDTH() {
         return WIDTH;
     }
 
-    public static double getGRAVITY() {
+    static double getGRAVITY() {
         return GRAVITY;
     }
 
-    public boolean isGameOver() {
+    boolean isGameOver() {
         return gameOver;
     }
 
-    public boolean isStarted() {
+    boolean isStarted() {
         return started;
     }
 

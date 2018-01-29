@@ -7,10 +7,10 @@ public class Column {
 
     private static int WIDTH = 60;
     private int GAP = 100;
-    private int MIN_FROM_EDGE = 50;
+    private int MIN_FROM_EDGE = 30;
     private int X;
 
-    private Color color;
+    private Color COLOR;
 
     private Rectangle top;
     private Rectangle bottom;
@@ -18,17 +18,16 @@ public class Column {
     /**
      *
      * @param X - the X coordinate of the column to be added
-     * @param HEIGHT
      */
-    public Column(int X, int HEIGHT) {
+    public Column(int X) {
         this.X = X;
-        this.color = Color.GREEN.darker();
+        this.COLOR = Color.GREEN.darker();
 
         Random rand = new Random();
-        int randomHeight = rand.nextInt((HEIGHT-Background.getFLOOR_HEIGHT())-(2*MIN_FROM_EDGE));
+        int randomHeight = MIN_FROM_EDGE+rand.nextInt((TrashyBird.getHEIGHT()-Background.getFLOOR_HEIGHT()-(2*MIN_FROM_EDGE)-GAP));
 
-        this.top = new Rectangle(X, 0, this.WIDTH, MIN_FROM_EDGE+randomHeight);
-        this.bottom = new Rectangle(X, MIN_FROM_EDGE+randomHeight+GAP, this.WIDTH, (HEIGHT-randomHeight)-MIN_FROM_EDGE-GAP);
+        this.top = new Rectangle(X, 0, this.WIDTH, randomHeight);
+        this.bottom = new Rectangle(X, randomHeight+GAP, this.WIDTH, TrashyBird.getHEIGHT()-Background.getFLOOR_HEIGHT()-(randomHeight+GAP));
     }
 
     public static int getWidth() {
@@ -45,7 +44,7 @@ public class Column {
     }
 
     public void paintColumn(Graphics g){
-        g.setColor(color);
+        g.setColor(COLOR);
 
         g.fillRect(top.x, top.y, top.width, top.height);
 
