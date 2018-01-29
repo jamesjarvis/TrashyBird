@@ -19,6 +19,7 @@ public class TrashyBird implements ActionListener, KeyListener, MouseListener{
 
     private int ticks;
     private static int speed;
+    private static double GRAVITY;
 
     public boolean gameOver, started;
 
@@ -27,8 +28,6 @@ public class TrashyBird implements ActionListener, KeyListener, MouseListener{
     private Background background;
 
     private Bird bird;
-
-    private Random rand;
 
     private ArrayList<Column> columns;
 
@@ -39,10 +38,10 @@ public class TrashyBird implements ActionListener, KeyListener, MouseListener{
 
         ticks = 0;
         speed = 4;
+        GRAVITY = 2;
         renderer = new Renderer();
         background = new Background(WIDTH, HEIGHT);
         bird = new Bird(WIDTH, HEIGHT);
-        rand = new Random();
         columns = new ArrayList<Column>();
 
         jframe.add(renderer);
@@ -80,6 +79,22 @@ public class TrashyBird implements ActionListener, KeyListener, MouseListener{
 
     public static int getSpeed() {
         return speed;
+    }
+
+    public static int getWIDTH() {
+        return WIDTH;
+    }
+
+    public static double getGRAVITY() {
+        return GRAVITY;
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
+    }
+
+    public boolean isStarted() {
+        return started;
     }
 
     //Used to repaint the whole scene
