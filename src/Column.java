@@ -6,9 +6,11 @@ import java.util.Random;
 public class Column {
 
     private static int WIDTH = 60;
-    private int GAP = 100;
+    private int GAP_SIZE = 100;
     private int MIN_FROM_EDGE = 30;
     private int X;
+    private boolean check;
+    private int GAP_START;
 
     private Color COLOR;
 
@@ -22,19 +24,34 @@ public class Column {
     public Column(int X) {
         this.X = X;
         this.COLOR = Color.GREEN.darker();
+        this.check = false;
 
         Random rand = new Random();
-        int randomHeight = MIN_FROM_EDGE+rand.nextInt((TrashyBird.getHEIGHT()-Background.getFLOOR_HEIGHT()-(2*MIN_FROM_EDGE)-GAP));
+        GAP_START = MIN_FROM_EDGE+rand.nextInt((TrashyBird.getHEIGHT()-Background.getFLOOR_HEIGHT()-(2*MIN_FROM_EDGE)-GAP_SIZE));
 
-        this.top = new Rectangle(X, 0, this.WIDTH, randomHeight);
-        this.bottom = new Rectangle(X, randomHeight+GAP, this.WIDTH, TrashyBird.getHEIGHT()-Background.getFLOOR_HEIGHT()-(randomHeight+GAP));
+        this.top = new Rectangle(X, 0, this.WIDTH, GAP_START);
+        this.bottom = new Rectangle(X, GAP_START+GAP_SIZE, this.WIDTH, TrashyBird.getHEIGHT()-Background.getFLOOR_HEIGHT()-(GAP_START+GAP_SIZE));
     }
 
-    public static int getWidth() {
+    public static int getWIDTH() {
         return WIDTH;
     }
     public int getX() {
         return X;
+    }
+    public boolean isCheck() {
+        return check;
+    }
+    public void setCheck(boolean check) {
+        this.check = check;
+    }
+
+    public int getGAP_SIZE() {
+        return GAP_SIZE;
+    }
+
+    public int getGAP_START() {
+        return GAP_START;
     }
 
     public void incrementPosition(){

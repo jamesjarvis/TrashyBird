@@ -62,7 +62,7 @@ public class Bird{
         if(this.y_location+this.SIZE>TrashyBird.getHEIGHT()-Background.getFLOOR_HEIGHT()){
             y_location = TrashyBird.getHEIGHT()-Background.getFLOOR_HEIGHT()-this.SIZE;
             velocity = 0;
-            dead();
+            TrashyBird.collision();
         }else if(y_location<0){
             y_location=0;
             velocity=0;
