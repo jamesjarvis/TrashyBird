@@ -1,15 +1,9 @@
 import java.awt.event.*;
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Rectangle;
 import java.util.ArrayList;
-import java.util.Random;
-
 
 import javax.swing.JFrame;
 import javax.swing.Timer;
-
 
 public class TrashyBird implements ActionListener, KeyListener, MouseListener{
 
@@ -29,6 +23,8 @@ public class TrashyBird implements ActionListener, KeyListener, MouseListener{
 
     private static Bird bird;
 
+    private static Menu menu;
+
     private static ArrayList<Column> columns;
 
     private static int score;
@@ -44,6 +40,7 @@ public class TrashyBird implements ActionListener, KeyListener, MouseListener{
         renderer = new Renderer();
         background = new Background(WIDTH, HEIGHT);
         bird = new Bird(WIDTH, HEIGHT);
+        menu = new Menu();
         columns = new ArrayList<Column>();
         started = false;
         gameOver = false;
@@ -90,11 +87,11 @@ public class TrashyBird implements ActionListener, KeyListener, MouseListener{
         return GRAVITY;
     }
 
-    boolean isGameOver() {
+    static boolean isGameOver() {
         return gameOver;
     }
 
-    boolean isStarted() {
+    static boolean isStarted() {
         return started;
     }
 
@@ -132,6 +129,7 @@ public class TrashyBird implements ActionListener, KeyListener, MouseListener{
     public static void collision(){
         bird.dead();
         gameOver=true;
+        started = false;
     }
 
     public static void restart(){
@@ -157,6 +155,7 @@ public class TrashyBird implements ActionListener, KeyListener, MouseListener{
     public void repaint(Graphics g){
         background.paintBackground(g);
         bird.paintBird(g);
+        menu.paintMenu(g);
 
         for(Column column: columns){
             column.paintColumn(g);
