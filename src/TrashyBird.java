@@ -49,7 +49,7 @@ public class TrashyBird implements ActionListener, KeyListener, MouseListener{
         jframe.add(renderer);
         jframe.setTitle("TrashyBird");
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jframe.setResizable(true);
+        jframe.setResizable(false);
         jframe.setSize(WIDTH, HEIGHT);
         jframe.addMouseListener(this);
         jframe.addKeyListener(this);
@@ -211,7 +211,11 @@ public class TrashyBird implements ActionListener, KeyListener, MouseListener{
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        bird.jump();
+        if(started){
+            bird.jump();
+        }else{
+            restart();
+        }
     }
 
     @Override
