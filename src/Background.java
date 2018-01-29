@@ -2,7 +2,7 @@ import java.awt.Rectangle;
 import java.awt.Graphics;
 import java.awt.Color;
 
-public class Background {
+class Background {
 
     private Rectangle sky;
     private Color skyColor;
@@ -15,7 +15,7 @@ public class Background {
 
     private static int FLOOR_HEIGHT = 100;
 
-    public Background(int WIDTH, int HEIGHT) {
+    Background(int WIDTH, int HEIGHT) {
         this.sky = new Rectangle(0,0,WIDTH, HEIGHT);
         this.skyColor = Color.CYAN;
 
@@ -26,11 +26,11 @@ public class Background {
         this.floorTopperColor = Color.GREEN;
     }
 
-    public static int getFLOOR_HEIGHT() {
+    static int getFLOOR_HEIGHT() {
         return FLOOR_HEIGHT;
     }
 
-    public void paintBackground(Graphics g){
+    void paintBackground(Graphics g){
         g.setColor(skyColor);
         g.fillRect(sky.x, sky.y, sky.width, sky.height);
 

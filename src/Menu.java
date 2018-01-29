@@ -2,7 +2,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 
-public class Menu {
+class Menu {
 
     private Color fontColor = Color.WHITE;
     private Font font = new Font("Arial", 1, 20);
@@ -11,10 +11,10 @@ public class Menu {
     private String start = "TrashyBird";
     private String startInstructions = "Click to start";
 
-    public Menu() {
+    Menu() {
     }
 
-    public void paintMenu(Graphics g){
+    void paintMenu(Graphics g){
         g.setColor(fontColor);
         g.setFont(font);
 

@@ -3,7 +3,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
 
-public class Column {
+class Column {
 
     private static int WIDTH = 60;
     private int GAP_SIZE = 100;
@@ -21,7 +21,7 @@ public class Column {
      *
      * @param X - the X coordinate of the column to be added
      */
-    public Column(int X) {
+    Column(int X) {
         this.X = X;
         this.COLOR = Color.GREEN.darker();
         this.check = false;
@@ -29,38 +29,38 @@ public class Column {
         Random rand = new Random();
         GAP_START = MIN_FROM_EDGE+rand.nextInt((TrashyBird.getHEIGHT()-Background.getFLOOR_HEIGHT()-(2*MIN_FROM_EDGE)-GAP_SIZE));
 
-        this.top = new Rectangle(X, 0, this.WIDTH, GAP_START);
-        this.bottom = new Rectangle(X, GAP_START+GAP_SIZE, this.WIDTH, TrashyBird.getHEIGHT()-Background.getFLOOR_HEIGHT()-(GAP_START+GAP_SIZE));
+        this.top = new Rectangle(X, 0, WIDTH, GAP_START);
+        this.bottom = new Rectangle(X, GAP_START+GAP_SIZE, WIDTH, TrashyBird.getHEIGHT()-Background.getFLOOR_HEIGHT()-(GAP_START+GAP_SIZE));
     }
 
-    public static int getWIDTH() {
+    static int getWIDTH() {
         return WIDTH;
     }
-    public int getX() {
+    int getX() {
         return X;
     }
-    public boolean isCheck() {
+    boolean isCheck() {
         return check;
     }
-    public void setCheck(boolean check) {
-        this.check = check;
+    void setCheck() {
+        this.check = true;
     }
 
-    public int getGAP_SIZE() {
+    int getGAP_SIZE() {
         return GAP_SIZE;
     }
 
-    public int getGAP_START() {
+    int getGAP_START() {
         return GAP_START;
     }
 
-    public void incrementPosition(){
+    void incrementPosition(){
         X -= TrashyBird.getSpeed();
         top.setLocation(X, top.y);
         bottom.setLocation(X, bottom.y);
     }
 
-    public void paintColumn(Graphics g){
+    void paintColumn(Graphics g){
         g.setColor(COLOR);
 
         g.fillRect(top.x, top.y, top.width, top.height);
