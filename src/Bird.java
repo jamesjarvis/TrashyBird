@@ -65,7 +65,7 @@ class Bird{
     }
 
     void jump(){
-        velocity = -15;
+        velocity = -MAX_velocity;
     }
 
     void paintBird(Graphics g){

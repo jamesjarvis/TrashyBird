@@ -8,7 +8,7 @@ public class TrashyBird implements ActionListener, KeyListener, MouseListener{
 
     static TrashyBird trashyBird;
 
-    private static final int WIDTH = 600, HEIGHT = 800;
+    private static final int WIDTH = 600, HEIGHT = 600;
 
     private int ticks;
     private static int speed;
