@@ -11,7 +11,7 @@ public class TrashyBird implements ActionListener, KeyListener, MouseListener{
     private static final int WIDTH = 600, HEIGHT = 600;
 
     private int ticks;
-    private static int speed;
+    private static double speed;
     private static double GRAVITY;
 
     private static boolean gameOver, started;
@@ -74,7 +74,7 @@ public class TrashyBird implements ActionListener, KeyListener, MouseListener{
         return HEIGHT;
     }
 
-    static int getSpeed() {
+    static double getSpeed() {
         return speed;
     }
 
@@ -164,6 +164,8 @@ public class TrashyBird implements ActionListener, KeyListener, MouseListener{
 
         if(started) {
             if (!gameOver) {
+                speed+=0.001;//this just speeds up the game
+
                 if (ticks % 2 == 0) {
                     bird.incrementPosition();
                     for (Column column : columns) {
