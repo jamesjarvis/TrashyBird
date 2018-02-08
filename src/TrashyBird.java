@@ -58,6 +58,49 @@ public class TrashyBird implements ActionListener, KeyListener, MouseListener{
         timer.start();
     }
 
+    private static void restart(){
+        bird = new Bird(WIDTH, HEIGHT);
+        columns = new ArrayList<>();
+        started = false;
+        gameOver = false;
+        score = 0;
+        speed = 4;
+
+        addColumn(true);
+        addColumn(true);
+        addColumn(true);
+        addColumn(true);
+
+        started = true;
+        gameOver = false;
+        bird.jump();
+    }
+
+    static int getWIDTH() {
+        return WIDTH;
+    }
+    static int getHEIGHT() {
+        return HEIGHT;
+    }
+
+    static double getSpeed() {
+        return speed;
+    }
+    static double getGRAVITY() {
+        return GRAVITY;
+    }
+
+    static boolean isGameOver() {
+        return gameOver;
+    }
+    static boolean isStarted() {
+        return started;
+    }
+
+    static int getScore() {
+        return score;
+    }
+
     private static void addColumn(boolean start){
         int SPACE = 200;
         int columnWidth = Column.getWIDTH();
@@ -68,38 +111,6 @@ public class TrashyBird implements ActionListener, KeyListener, MouseListener{
             columns.add(new Column(columnWidth+(columns.get(columns.size()-1).getX()+SPACE)));
             columns.remove(0);
         }
-    }
-
-    static int getHEIGHT() {
-        return HEIGHT;
-    }
-
-    static double getSpeed() {
-        return speed;
-    }
-
-    static int getWIDTH() {
-        return WIDTH;
-    }
-
-    static double getGRAVITY() {
-        return GRAVITY;
-    }
-
-    static boolean isGameOver() {
-        return gameOver;
-    }
-
-    static boolean isStarted() {
-        return started;
-    }
-
-    static int getScore() {
-        return score;
-    }
-
-    private Boolean checkCollision(Column column) {
-        return column != null && (bird.getY_location() <= column.getGAP_START() || bird.getY_location() + bird.getSIZE() >= column.getGAP_START() + column.getGAP_SIZE());
     }
 
     private Column findColumn(int minX, int maxX){
@@ -121,27 +132,14 @@ public class TrashyBird implements ActionListener, KeyListener, MouseListener{
         column.setCheck();
     }
 
+    private Boolean checkCollision(Column column) {
+        return column != null && (bird.getY_location() <= column.getGAP_START() || bird.getY_location() + bird.getSIZE() >= column.getGAP_START() + column.getGAP_SIZE());
+    }
+
     static void collision(){
         bird.dead();
         gameOver=true;
         started = false;
-    }
-
-    private static void restart(){
-        bird = new Bird(WIDTH, HEIGHT);
-        columns = new ArrayList<>();
-        started = false;
-        gameOver = false;
-        score = 0;
-
-        addColumn(true);
-        addColumn(true);
-        addColumn(true);
-        addColumn(true);
-
-        started = true;
-        gameOver = false;
-        bird.jump();
     }
 
 
@@ -155,7 +153,6 @@ public class TrashyBird implements ActionListener, KeyListener, MouseListener{
         for(Column column: columns){
             column.paintColumn(g);
         }
-
     }
 
     @Override
@@ -178,20 +175,10 @@ public class TrashyBird implements ActionListener, KeyListener, MouseListener{
                 renderer.repaint();
                 if (checkCollision(findColumn(bird.getX_location() - Column.getWIDTH(), bird.getX_location() + bird.getSIZE()))) {
                     collision();
-                    try {
-                        renderer.repaint();
-                        Thread.sleep(0);
-                    } catch (InterruptedException exception) {
-                        exception.printStackTrace();
-                    }
+                    renderer.repaint();
                 }
             }
         }
-    }
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-
     }
 
     @Override
@@ -205,13 +192,6 @@ public class TrashyBird implements ActionListener, KeyListener, MouseListener{
             }
         }
     }
-
-    @Override
-    public void keyReleased(KeyEvent e)
-    {
-
-    }
-
     @Override
     public void mouseClicked(MouseEvent e) {
         if(started){
@@ -220,24 +200,28 @@ public class TrashyBird implements ActionListener, KeyListener, MouseListener{
             restart();
         }
     }
-
     @Override
     public void mousePressed(MouseEvent e) {
 
     }
-
     @Override
     public void mouseReleased(MouseEvent e) {
 
     }
-
     @Override
     public void mouseEntered(MouseEvent e) {
 
     }
-
     @Override
     public void mouseExited(MouseEvent e) {
+
+    }
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+    }
+    @Override
+    public void keyTyped(KeyEvent e) {
 
     }
 
